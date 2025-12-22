@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $article->title }} - Kompas KW</title>
+    <title>{{ $article->title }} - THE ARTICLE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .article-img {
@@ -136,7 +136,7 @@
     </div>
 
     <footer class="bg-light text-center py-4 mt-5">
-        <p>&copy; 2024 Kompas KW Project Laravel.</p>
+        <p>&copy; 2025 Project Laravel Tugas Besar.</p>
     </footer>
 
 </body>

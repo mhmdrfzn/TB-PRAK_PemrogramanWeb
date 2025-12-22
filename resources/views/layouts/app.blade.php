@@ -48,6 +48,34 @@
             border-bottom: 3px solid #dc3545;
             background-color: #fdfdfd;
         }
+        .page-link {
+        color: #dc3545; /* Teks merah */
+        border: 1px solid #dee2e6;
+        padding: 10px 18px; /* Tombol lebih besar & enak diklik */
+        font-weight: 600;
+        margin: 0 3px; /* Jarak antar tombol */
+        border-radius: 8px; /* Sudut membulat modern */
+        }
+
+        .page-link:hover {
+            color: #b02a37;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+        }
+
+        /* Tombol Aktif (Halaman yg sedang dibuka) */
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff; /* Teks putih */
+            background-color: #dc3545; /* Background MERAH */
+            border-color: #dc3545;
+            box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3); /* Efek bayangan */
+        }
+
+        /* Hilangkan fokus biru jelek saat diklik */
+        .page-link:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
         .navbar-category::-webkit-scrollbar { height: 0px; background: transparent; }
 
         /* Card Berita & Hero (Dipakai di Home & Category) */

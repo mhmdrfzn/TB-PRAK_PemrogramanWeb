@@ -76,7 +76,7 @@
             @endforelse
         </div>
 
-        <div class="d-flex justify-content-center mt-5">
+        <div class="d-flex justify-content-center mt-5 mb-5">
             {{ $articles->links() }}
         </div>
 

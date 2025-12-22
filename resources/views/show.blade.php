@@ -136,7 +136,7 @@
     </div>
 
     <footer class="bg-light text-center py-4 mt-5">
-        <p>&copy; 2024 Kompas KW Project Laravel.</p>
+        <p>&copy; 2025 Project Laravel Tugas Besar.</p>
     </footer>
 
 </body>

@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function allNews()
+    {
+        return view('all-news', [
+            'title' => 'Semua Berita',
+            // Ambil semua artikel, urutkan terbaru, batasi 12 per halaman
+            'articles' => \App\Models\Article::latest()->paginate(12),
+            // Tetap kirim kategori untuk navbar
+            'categories' => \App\Models\Category::all() 
+        ]);
+    }
 }

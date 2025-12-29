@@ -9,12 +9,13 @@ use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 // ---------------------------
 
 class DashboardController extends Controller
 {
-    // ... kode Anda selanjutnya
-    // ... kode Anda selanjutnya
+    
     public function index()
     {
         $userId = Auth::id();
@@ -166,7 +167,7 @@ class DashboardController extends Controller
 
         
         if ($article->image) {
-            \Illuminate\Support\Facades\Storage::delete($article->image);
+            Storage::disk('public')->delete($article->image);
         }
 
         // Hapus data dari database

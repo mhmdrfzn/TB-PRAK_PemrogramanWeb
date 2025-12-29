@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kompas KW - Portal Berita Modern</title>
+    <title>THE ARTICLE - Portal Berita Modern</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -49,12 +49,12 @@
             background-color: #fdfdfd;
         }
         .page-link {
-        color: #dc3545; /* Teks merah */
-        border: 1px solid #dee2e6;
-        padding: 10px 18px; /* Tombol lebih besar & enak diklik */
-        font-weight: 600;
-        margin: 0 3px; /* Jarak antar tombol */
-        border-radius: 8px; /* Sudut membulat modern */
+            color: #dc3545; /* Teks merah */
+            border: 1px solid #dee2e6;
+            padding: 10px 18px; /* Tombol lebih besar & enak diklik */
+            font-weight: 600;
+            margin: 0 3px; /* Jarak antar tombol */
+            border-radius: 8px; /* Sudut membulat modern */
         }
 
         .page-link:hover {

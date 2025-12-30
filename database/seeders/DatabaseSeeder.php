@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
                 'title' => $title,
                 'slug' => Str::slug($title) . '-' . Str::random(5),
                 'excerpt' => 'Ini adalah ringkasan berita tentang ' . $title . ' yang sedang hangat dibicarakan masyarakat.',
-                'content' => '<p>' . implode('</p><p>', $faker->paragraphs(5)) . '</p>', // Isi paragraf random tapi panjang
+                'body' => '<p>' . implode('</p><p>', $faker->paragraphs(5)) . '</p>', // Isi paragraf random tapi panjang
                 'image' => null, // Biarkan kosong atau null
                 'category_id' => $randomCategory->id,
                 'user_id' => $randomUser->id,

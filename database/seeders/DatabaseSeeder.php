@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
                 'username' => $faker->unique()->userName,
                 'email' => $faker->unique()->email,
                 'password' => bcrypt('password'),
-                'role' => 'author', // Anggap saja role default author/user biasa
+                'role' => 'user', // Anggap saja role default author/user biasa
             ]);
         }
 

@@ -54,12 +54,23 @@
                         @enderror
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                        <label for="password">Password</label>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
+                    <div class="position-relative mb-3">
+                        <div class="form-floating">
+                            <input id="password" type="password" class="form-control pe-5 @error('password') is-invalid @enderror" 
+                                name="password" required autocomplete="current-password" placeholder="Password">
+                            <label for="password">Password</label>
+                            
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" 
+                            id="togglePassword" style="cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye text-muted fs-5" id="iconPassword"></i>
+                        </span>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -80,11 +91,40 @@
                 </form>
 
                 <div class="text-center mt-5 text-muted small">
-                    &copy; 2024 Kompas KW Project
+                    &copy; 2025 Project Laravel Tugas Besar
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+        const iconPassword = document.querySelector('#iconPassword');
+
+        if (togglePassword && passwordInput && iconPassword) {
+            togglePassword.addEventListener('click', function () {
+                // 1. Toggle Tipe Input
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // 2. Toggle Ikon
+                if (type === 'text') {
+                    iconPassword.classList.remove('bi-eye');
+                    iconPassword.classList.add('bi-eye-slash'); // Mata terbuka/dicoret
+                    iconPassword.classList.remove('text-muted');
+                    iconPassword.classList.add('text-primary'); // Opsional: warna biru saat aktif
+                } else {
+                    iconPassword.classList.remove('bi-eye-slash');
+                    iconPassword.classList.add('bi-eye'); // Mata tertutup
+                    iconPassword.classList.add('text-muted');
+                    iconPassword.classList.remove('text-primary');
+                }
+            });
+        }
+    });
+</script>
 @endsection

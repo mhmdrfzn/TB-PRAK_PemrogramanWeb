@@ -52,17 +52,35 @@
                         @enderror
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                        <label for="password">Password</label>
-                        @error('password')
-                            <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
-                        @enderror
+                    {{-- 1. PASSWORD UTAMA --}}
+                    <div class="position-relative mb-3">
+                        <div class="form-floating">
+                            <input id="password" type="password" class="form-control pe-5 @error('password') is-invalid @enderror" 
+                                name="password" required autocomplete="new-password" placeholder="Password">
+                            <label for="password">Password</label>
+                            @error('password')
+                                <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                        
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" 
+                            id="togglePassword" style="cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye text-muted fs-5" id="iconPassword"></i>
+                        </span>
                     </div>
 
-                    <div class="form-floating mb-4">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                        <label for="password-confirm">Ulangi Password</label>
+                    {{-- 2. KONFIRMASI PASSWORD --}}
+                    <div class="position-relative mb-4">
+                        <div class="form-floating">
+                            <input id="password-confirm" type="password" class="form-control pe-5" 
+                                name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                            <label for="password-confirm">Ulangi Password</label>
+                        </div>
+
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" 
+                            id="toggleConfirm" style="cursor: pointer; z-index: 10;">
+                            <i class="bi bi-eye text-muted fs-5" id="iconConfirm"></i>
+                        </span>
                     </div>
 
                     <button type="submit" class="btn btn-danger w-100 py-2 fw-bold rounded-pill">DAFTAR SEKARANG</button>
@@ -77,4 +95,41 @@
         <div class="col-lg-7 d-none d-lg-block register-image"></div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        function setupToggle(triggerId, inputId, iconId) {
+            const trigger = document.querySelector(triggerId);
+            const input = document.querySelector(inputId);
+            const icon = document.querySelector(iconId);
+
+            if (trigger && input && icon) {
+                trigger.addEventListener('click', function () {
+                    // Ubah tipe input
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+
+                    // Ubah Ikon
+                    if (type === 'text') {
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash'); // Mata dicoret (terbuka)
+                        icon.classList.remove('text-muted');
+                        icon.classList.add('text-primary'); // Opsional: Beri warna saat aktif
+                    } else {
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye'); // Mata biasa (tertutup)
+                        icon.classList.add('text-muted');
+                        icon.classList.remove('text-primary');
+                    }
+                });
+            }
+        }
+
+        // Jalankan fungsi
+        setupToggle('#togglePassword', '#password', '#iconPassword');
+        setupToggle('#toggleConfirm', '#password-confirm', '#iconConfirm');
+
+    });
+</script>
 @endsection

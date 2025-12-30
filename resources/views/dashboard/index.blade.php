@@ -59,6 +59,9 @@
                     <thead class="bg-light text-secondary">
                         <tr>
                             <th class="ps-4 py-3">Judul Artikel</th>
+                            
+                            <th>Penulis</th> 
+                            
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Views</th>
@@ -83,6 +86,19 @@
                                     </div>
                                 </div>
                             </td>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light border rounded-circle d-flex justify-content-center align-items-center me-2" style="width: 30px; height: 30px;">
+                                        <i class="bi bi-person text-secondary"></i>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-bold text-dark small">{{ $article->user->name }}</span>
+                                        <span class="text-muted" style="font-size: 0.7rem;">{{ $article->user->email }}</span>
+                                    </div>
+                                </div>
+                            </td>
+
                             <td>
                                 <span class="badge bg-light text-dark border border-secondary rounded-pill fw-normal">
                                     {{ $article->category->name }}
@@ -139,70 +155,31 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Ambil semua form dengan class 'form-delete'
         const deleteForms = document.querySelectorAll('.form-delete');
-
         deleteForms.forEach(form => {
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Tahan dulu, jangan kirim!
-
+                event.preventDefault();
                 const currentForm = this;
-
                 Swal.fire({
                     title: 'Yakin ingin menghapus?',
                     text: "Data ini akan hilang selamanya!",
                     icon: 'warning',
-                    showCancelButton: true, // INI PENTING: Munculkan tombol "Batal"
+                    showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Ya, Hapus!',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
-                    // Cek apakah tombol "Ya" diklik?
                     if (result.isConfirmed) {
-                        currentForm.submit(); // Baru kirim form secara manual
+                        currentForm.submit();
                     }
                 });
             });
         });
     });
 </script>
-
 @endsection
-
-
-
-{{-- @section('scripts') <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    // Tangkap semua form dengan class 'form-delete'
-    const deleteForms = document.querySelectorAll('.form-delete');
-
-    deleteForms.forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Jangan submit dulu!
-
-            const currentForm = this;
-
-            Swal.fire({
-                title: 'Yakin ingin menghapus?',
-                text: "Data artikel ini tidak bisa dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545', // Warna merah (Danger)
-                cancelButtonColor: '#6c757d', // Warna abu-abu (Secondary)
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika user klik 'Ya', submit form secara manual
-                    currentForm.submit();
-                }
-            });
-        });
-    });
-</script>
-@endsection --}}

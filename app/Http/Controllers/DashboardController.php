@@ -18,20 +18,38 @@ class DashboardController extends Controller
     
     public function index()
     {
-        $userId = Auth::id();
+        // Ambil data user yang sedang login
+        $user = auth::user();
 
-        // Ambil data artikel
-        $articles = Article::where('user_id', $userId)
-                        ->with('category') // Eager load kategori biar cepat
+        // --- BAGIAN 1: LOGIKA DATA ARTIKEL ---
+        if ($user->role === 'admin') {
+            // JIKA ADMIN: Ambil SEMUA artikel
+            $articles = Article::with('category')
                         ->latest()
                         ->paginate(10);
+        } else {
+            // JIKA USER BIASA: Ambil artikel MILIKNYA SENDIRI
+            $articles = Article::where('user_id', $user->id)
+                        ->with('category')
+                        ->latest()
+                        ->paginate(10);
+        }
 
-        // Hitung Statistik Sederhana
+        // --- BAGIAN 2: LOGIKA STATISTIK ---
+        // Kita siapkan Query Builder dasar agar codingan statistik lebih rapi
+        $queryStats = Article::query();
+
+        // Jika BUKAN admin, filter statistik hanya untuk user tersebut
+        if ($user->role !== 'admin') {
+            $queryStats->where('user_id', $user->id);
+        }
+
+        // Hitung Statistik (Menggunakan query yang sudah disesuaikan di atas)
         $stats = [
-            'total_articles' => Article::where('user_id', $userId)->count(),
-            'total_views'    => Article::where('user_id', $userId)->sum('views'),
-            'published'      => Article::where('user_id', $userId)->where('is_published', 1)->count(),
-            'draft'          => Article::where('user_id', $userId)->where('is_published', 0)->count(),
+            'total_articles' => (clone $queryStats)->count(),
+            'total_views'    => (clone $queryStats)->sum('views'),
+            'published'      => (clone $queryStats)->where('is_published', 1)->count(),
+            'draft'          => (clone $queryStats)->where('is_published', 0)->count(),
         ];
 
         return view('dashboard.index', [
@@ -97,7 +115,7 @@ class DashboardController extends Controller
         $article = Article::findOrFail($id);
         
         // Pastikan yang edit adalah pemilik artikelnya (Security)
-        if ($article->user_id != Auth::id()) {
+        if ($article->user_id != Auth::id() && Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak berhak mengedit artikel ini.');
         }
 
@@ -114,7 +132,7 @@ class DashboardController extends Controller
         $article = Article::findOrFail($id);
 
         // Security check lagi
-        if ($article->user_id != Auth::id()) {
+        if ($article->user_id != Auth::id() && Auth::user()->role !== 'admin') {
             abort(403);
         }
 
@@ -161,7 +179,7 @@ class DashboardController extends Controller
         $article = Article::findOrFail($id);
 
         // Security Check: Pastikan yang menghapus adalah pemiliknya
-        if ($article->user_id != Auth::id()) {
+        if ($article->user_id != Auth::id() && Auth::user()->role !== 'admin') {
             abort(403);
         }
 

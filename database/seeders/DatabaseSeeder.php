@@ -106,7 +106,8 @@ class DatabaseSeeder extends Seeder
                 'image' => null, // Biarkan kosong atau null
                 'category_id' => $randomCategory->id,
                 'user_id' => $randomUser->id,
-                'published_at' => now(),
+                'is_published' => $faker->boolean(100), // 100% kemungkinan tayang
+                'views' => $faker->numberBetween(0, 100000),
             ]);
 
             // Tempelkan Tag Acak (1 s/d 3 tag per artikel)

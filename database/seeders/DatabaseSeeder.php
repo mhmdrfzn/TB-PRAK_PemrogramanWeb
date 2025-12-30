@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         // A. Admin Utama (Akun Anda)
         User::create([
             'name' => 'Admin Kompas',
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
+            'username' => 'admin2',
+            'email' => 'admin@example.com',
             'password' => bcrypt('password'),
             'role' => 'admin',
         ]);
